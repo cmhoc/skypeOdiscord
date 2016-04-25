@@ -71,6 +71,10 @@ skype.toDiscord = function (channel, content) {
     content = content.replace(match[0], '*@'+match[1]+'('+match[2]+')*');
     match = mention.exec(content);
   }
+  var quote = /<quote[^>]+>(.*?)<\/quote>/gm;
+  content = content.replace(quote, '```$1```').replace(/<legacyquote>(.*?)<\/legacyquote>/gm, '_$1_');
+  content = content.replace(/<uriobject[^>]*>(.*?)<\/uriobject>/gm, '[Skype picture/attachment]');
+  content = content.replace(/<location[^>]*>(.*?)<\/location>/gm, '__[location]: $1__');
   return content;
 };
 
